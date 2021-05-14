@@ -7,78 +7,157 @@ namespace FileIODemo
     {
         static void Main(string[] args)
         {
-            // FileExists();
-            // ReadAllLines();
-          //  FileCopy();
-            //ReadAllText();
-            //DeleteFile();
-           // ReadFromStreamReader();
-            WriteUsingStreamReader();
-
-            Console.ReadKey();
-
+             // FileExists();
+             // ReadAllLines();   //exception
+             // FileCopy();
+             // ReadAllText();
+             // DeleteFile();
+             // ReadFromStreamReader();
+             // WriteUsingStreamReader();
+               Console.ReadKey();
         }
+        static string path = @"C:\Users\prash\source\repos\FileIODemo\FileIODemo\Example.txt";
         public static void FileExists()
         {
-            String path = @"C:\Users\prash\source\repos\FileIODemo\FileIODemo\Example.txt";
-            if (File.Exists(path))            
-                Console.WriteLine("File Exist");            
-            else
-                Console.WriteLine("File doesn't exist");
+            try
+            {
+                if (File.Exists(path))
+                    Console.WriteLine("File Exist");
+                else
+                    Console.WriteLine("File doesn't exist");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
         }
         public static void ReadAllLines()
         {
-            String path = @"C:\Users\prash\source\repos\FileIODemo\FileIODemo\Example.txt";
-            String[] lines;
-            lines = File.ReadAllLines(path);
-            Console.WriteLine(lines[0]);
-            Console.WriteLine(lines[1]);
-
+            try
+            {
+                string[] lines;
+                if (File.Exists(path))
+                {
+                    lines = File.ReadAllLines(path);
+                    Console.WriteLine(lines[0]);
+                    Console.WriteLine(lines[1]);
+                }
+                else
+                {
+                    Console.WriteLine("File doesn't exist");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
         public static void ReadAllText()
         {
-
-            String path = @"C:\Users\prash\source\repos\FileIODemo\FileIODemo\Example.txt";
-            String lines;
-            lines = File.ReadAllText(path);
-            Console.WriteLine(lines);
-
+            try
+            {
+                string lines;
+                if (File.Exists(path))
+                {
+                    lines = File.ReadAllText(path);
+                    Console.WriteLine(lines);
+                }
+                else
+                {
+                    Console.WriteLine("File doesn't exist");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
         public static void FileCopy()
         {
-            String path = @"C:\Users\prash\source\repos\FileIODemo\FileIODemo\Example.txt";
-            String copypath = @"C:\Users\prash\source\repos\FileIODemo\FileIODemo\ExampleNew.txt";
-            File.Copy(path, copypath);
-
+            try
+            {
+                string copypath = @"C:\Users\prash\source\repos\FileIODemo\FileIODemo\ExampleNew.txt";
+                if (File.Exists(path))
+                {
+                    File.Copy(path, copypath);
+                    Console.WriteLine("Filed Copy Successfully");
+                }
+                else
+                {
+                    Console.WriteLine("File doesn't exist");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
         public static void DeleteFile()
         {
-            String path = @"C:\Users\prash\source\repos\FileIODemo\FileIODemo\ExampleNew.txt";
-            File.Delete(path);
+            try
+            {
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+                else
+                {
+                    Console.WriteLine("File doesn't exist");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
         public static void ReadFromStreamReader()
         {
-            String path = @"C:\Users\prash\source\repos\FileIODemo\FileIODemo\Example.txt";
-            using (StreamReader sr = File.OpenText(path))
+            try
             {
-                String s = "";
-                while((s=sr.ReadLine())!=null)
+                if (File.Exists(path))
                 {
-                    Console.WriteLine(s);
+                    using (StreamReader sr = File.OpenText(path))
+                    {
+                        String s = "";
+                        while ((s = sr.ReadLine()) != null)
+                        {
+                            Console.WriteLine(s);
+                        }
+                    }
                 }
+                else
+                {
+                    Console.WriteLine("File doesn't exist");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
         }
         public static void WriteUsingStreamReader()
         {
-            String path = @"C:\Users\prash\source\repos\FileIODemo\FileIODemo\Example1.txt";
-            using (StreamWriter sr = File.AppendText(path))
+            try
             {
-                sr.WriteLine("Hello World - .Net is Awesome");
-                sr.Close();
-                Console.WriteLine(File.ReadAllText(path));
+                if (File.Exists(path))
+                {
+                    using (StreamWriter sr = File.AppendText(path))
+                    {
+                        sr.WriteLine(".net vs Java");
+                        sr.Close();
+                        Console.WriteLine(File.ReadAllText(path));
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("File doesn't exist");
+                }
             }
-
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
-
     }
 }
