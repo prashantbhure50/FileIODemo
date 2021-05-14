@@ -14,7 +14,7 @@ namespace FileIODemo
              // DeleteFile();
              // ReadFromStreamReader();
              // WriteUsingStreamReader();
-              // Console.ReadKey();
+               Console.ReadKey();
         }
         static string path = @"C:\Users\prash\source\repos\FileIODemo\FileIODemo\Example.txt";
         public static void FileExists()
